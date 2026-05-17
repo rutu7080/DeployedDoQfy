@@ -14,7 +14,7 @@ async function main() {
   console.log("DocRegistry deployed to:", contractAddress);
 
   // Grant ISSUER_ROLE to your MetaMask account (the one you use in the React app)
-  const metaMaskAccount = "0x90F79bf6EB2c4f870365E785982E1f101E93b906";
+  const metaMaskAccount = "0x14A7ba4122327038947a7FF4B2a1878D51d53920";
   
   console.log("Granting ISSUER_ROLE to MetaMask account:", metaMaskAccount);
   

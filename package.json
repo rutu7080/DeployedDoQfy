@@ -17,7 +17,10 @@
     "hardhat": "^2.26.3"
   },
   "dependencies": {
+    "axios": "^1.16.1",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "form-data": "^4.0.5",
     "multer": "^2.0.2",
     "qrcode": "^1.5.4"
   }

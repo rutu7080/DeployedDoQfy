@@ -4,8 +4,8 @@ import QRCodeLib from "qrcode";
 import DocRegistry from "./artifacts/contracts/DocRegistry.sol/DocRegistry.json";
 import "./App.css";
 
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-const localProviderUrl = "http://127.0.0.1:8545";
+const contractAddress = "0x14A7ba4122327038947a7FF4B2a1878D51d53920";
+//const localProviderUrl = "http://127.0.0.1:8545";
 
 function App() {
 
@@ -34,8 +34,9 @@ function App() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [roleStatus, setRoleStatus] = useState(null);
-
-  const provider = new ethers.JsonRpcProvider(localProviderUrl);
+const provider = new ethers.JsonRpcProvider(
+  process.env.SEPOLIA_RPC_URL
+);
 
   async function openQRModal(cid) {
     setSelectedDocCID(cid);
@@ -125,49 +126,75 @@ function App() {
     }
   }
 
-  async function switchToHardhatNetwork() {
-    if (!window.ethereum) return;
-    try {
-      await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x7A69' }],
-      });
-    } catch (switchError) {
-      if (switchError.code === 4902) {
-        try {
-          await window.ethereum.request({
-            method: 'wallet_addEthereumChain',
-            params: [{
-              chainId: '0x7A69',
-              chainName: 'Hardhat Localhost',
-              nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
-              rpcUrls: ['http://127.0.0.1:8545'],
-            }],
-          });
-        } catch (addError) {
-          console.error('Failed to add network:', addError);
-        }
+  async function switchToSepoliaNetwork() {
+  if (!window.ethereum) return;
+
+  try {
+    await window.ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: "0xaa36a7" }],
+    });
+  } catch (switchError) {
+    if (switchError.code === 4902) {
+      try {
+        await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: "0xaa36a7",
+              chainName: "Sepolia Testnet",
+              nativeCurrency: {
+                name: "SepoliaETH",
+                symbol: "ETH",
+                decimals: 18,
+              },
+              rpcUrls: ["https://rpc.sepolia.org"],
+              blockExplorerUrls: ["https://sepolia.etherscan.io"],
+            },
+          ],
+        });
+      } catch (addError) {
+        console.error("Failed to add Sepolia network:", addError);
       }
     }
   }
+}
 
   async function connectWallet() {
-    if (!window.ethereum) {
-      alert("MetaMask not found in your browser.");
+  if (!window.ethereum) {
+    alert("MetaMask not found in your browser.");
+    return;
+  }
+
+  try {
+    await switchToSepoliaNetwork();
+
+    await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+
+    const walletProvider = new ethers.BrowserProvider(window.ethereum);
+
+    const network = await walletProvider.getNetwork();
+
+    if (network.chainId !== 11155111n) {
+      alert("Please switch to Sepolia Testnet.");
       return;
     }
-    try {
-      await switchToHardhatNetwork();
-      await window.ethereum.request({ method: "eth_requestAccounts" });
-      const walletProvider = new ethers.BrowserProvider(window.ethereum);
-      const walletSigner = await walletProvider.getSigner();
-      setSigner(walletSigner);
-      setStep("options");
-      setError(null);
-    } catch (err) {
-      setError("Wallet connection failed or rejected.");
-    }
+
+    const walletSigner = await walletProvider.getSigner();
+
+    setSigner(walletSigner);
+
+    setStep("options");
+
+    setError(null);
+
+  } catch (err) {
+    console.error(err);
+    setError("Wallet connection failed or rejected.");
   }
+}
 
   async function checkRoles() {
     if (!contract || !account) return;
