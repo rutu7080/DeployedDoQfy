@@ -37,6 +37,7 @@ function App() {
 const provider = new ethers.JsonRpcProvider(
   process.env.SEPOLIA_RPC_URL
 );
+ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
   async function openQRModal(cid) {
     setSelectedDocCID(cid);
@@ -245,7 +246,7 @@ const provider = new ethers.JsonRpcProvider(
     setError(null);
     const formData = new FormData();
     formData.append("file", file);
-    const res = await fetch("http://localhost:5000/upload", { method: "POST", body: formData });
+    const res = await fetch(`${BACKEND_URL}/upload`, { method: "POST", body: formData });
     const data = await res.json();
     try {
       console.log("Issuing document:", fileHash32, file.name);
