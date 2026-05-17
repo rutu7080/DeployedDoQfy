@@ -5,7 +5,7 @@ import DocRegistry from "./artifacts/contracts/DocRegistry.sol/DocRegistry.json"
 import "./App.css";
 
 // ✅ Hardcoded contract address (safe to expose — it's public on-chain)
-const contractAddress = "0x14A7ba4122327038947a7FF4B2a1878D51d53920";
+const contractAddress = "0x40A667b5b1B28CD72FBe75B93df56696D8056032";
 
 // ✅ Public Sepolia RPC — no env variable needed in React frontend
 // SEPOLIA_RPC_URL is backend/Hardhat only and cannot be accessed here
