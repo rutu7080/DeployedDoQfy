@@ -2,11 +2,10 @@
   "name": "blockchain-doc-verifier",
   "version": "1.0.0",
   "description": "A project to issue and revoke documents on blockchain",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
-    "test": "npx hardhat test",
-    "compile": "npx hardhat compile",
-    "clean": "npx hardhat clean"
+    "start": "node server/server.js",
+    "dev": "node server/server.js"
   },
   "keywords": [],
   "author": "",
