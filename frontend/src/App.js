@@ -9,7 +9,7 @@ const contractAddress = "0x40A667b5b1B28CD72FBe75B93df56696D8056032";
 
 // ✅ Public Sepolia RPC — no env variable needed in React frontend
 // SEPOLIA_RPC_URL is backend/Hardhat only and cannot be accessed here
-const PUBLIC_SEPOLIA_RPC = "https://rpc.sepolia.org";
+const PUBLIC_SEPOLIA_RPC = "https://eth-sepolia.g.alchemy.com/v2/V7rJmLXzVI7lk2iqcSHcL";
 
 // ✅ Only REACT_APP_ prefixed variables are accessible in React
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
