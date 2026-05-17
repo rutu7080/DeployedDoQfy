@@ -494,7 +494,7 @@ function App() {
                   <div className="role-card-title">Issuer</div>
                   <div className="role-card-description">Issue &amp; manage documents</div>
                 </button>
-                <button className="role-card role-user hover-lift" onClick={() => { setRole("user"); setStep("connect"); }}>
+                <button className="role-card role-user hover-lift" onClick={() => { setRole("user"); setStep("options"); }}>
                   <div className="role-card-icon">👩🏽‍🎓</div>
                   <div className="role-card-title">User</div>
                   <div className="role-card-description">View document details</div>
