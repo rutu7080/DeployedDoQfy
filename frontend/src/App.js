@@ -51,7 +51,7 @@ function App() {
   // ─────────────────────────────────────────────
   async function openQRModal(cid) {
     setSelectedDocCID(cid);
-    const url = `https://ipfs.io/ipfs/${cid}`;
+    const url = `https://gateway.pinata.cloud/ipfs/${cid}`;
     try {
       const qrDataURL = await QRCodeLib.toDataURL(url, {
         width: 200,
@@ -301,7 +301,7 @@ function App() {
       const receipt = await tx.wait();
       console.log("Confirmed in block:", receipt.blockNumber);
 
-      const ipfsLink = `https://ipfs.io/ipfs/${data.cid}`;
+      const ipfsLink = `https://gateway.pinata.cloud/ipfs/${data.cid}`;
       setMessage(ipfsLink);
 
       alert(
@@ -841,7 +841,7 @@ function App() {
                 <p><strong style={{ color: "rgba(255,255,255,0.7)" }}>🔗 IPFS CID:</strong> <code>{fetchedDoc.ipfsUri}</code></p>
                 <p>
                   <strong style={{ color: "rgba(255,255,255,0.7)" }}>🔗 IPFS Link:</strong>{" "}
-                  <a href={`https://ipfs.io/ipfs/${fetchedDoc.ipfsUri}`} target="_blank" rel="noopener noreferrer" style={{ color: "#a78bfa" }}>
+                  <a href={`https://gateway.pinata.cloud/ipfs/${fetchedDoc.ipfsUri}`} target="_blank" rel="noopener noreferrer" style={{ color: "#a78bfa" }}>
                     Open on IPFS ↗
                   </a>
                 </p>
@@ -866,7 +866,7 @@ function App() {
                 </div>
                 <div style={{ textAlign: "center", padding: "14px", background: "rgba(102,126,234,0.08)", borderRadius: "12px", border: "1px solid rgba(102,126,234,0.15)" }}>
                   <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.8rem", marginBottom: "8px" }}>OR OPEN DIRECTLY</p>
-                  <a href={`https://ipfs.io/ipfs/${selectedDocCID}`} target="_blank" rel="noopener noreferrer" style={{ color: "#a78bfa", textDecoration: "none", fontWeight: "700", fontSize: "0.95rem" }}>
+                  <a href={`https://gateway.pinata.cloud/ipfs/${selectedDocCID}`} target="_blank" rel="noopener noreferrer" style={{ color: "#a78bfa", textDecoration: "none", fontWeight: "700", fontSize: "0.95rem" }}>
                     🔗 Click here to open
                   </a>
                 </div>
